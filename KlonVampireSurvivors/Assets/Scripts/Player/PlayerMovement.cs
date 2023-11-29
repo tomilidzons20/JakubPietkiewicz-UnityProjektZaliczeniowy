@@ -9,8 +9,21 @@ public class PlayerMovement : MonoBehaviour
 
     public Rigidbody2D rb;
     public Animator animator;
+    public WeaponPoint weaponPoint;
+
+    Vector2 cursorPosition;
 
     Vector2 movementDirection;
+
+    private void Update()
+    {
+        weaponPoint.cursorPosition = cursorPosition;
+    }
+
+    private void FixedUpdate()
+    {
+        rb.MovePosition(rb.position + movementDirection * movementSpeed * Time.fixedDeltaTime);
+    }
 
     void OnMove(InputValue movementValue)
     {
@@ -27,8 +40,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    void OnLook()
     {
-        rb.MovePosition(rb.position + movementDirection * movementSpeed * Time.fixedDeltaTime);
+        Vector3 mousePosition = Mouse.current.position.ReadValue();
+        mousePosition.z = Camera.main.nearClipPlane;
+        cursorPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+    }
+
+    void OnAltFire()
+    { 
+        weaponPoint.SwingStaff();
     }
 }
