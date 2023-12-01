@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,21 +6,25 @@ using UnityEngine;
 public class Staff : MonoBehaviour
 {
     public int staffDamage = 0;
+    public float staffKnockbackForce = 6f;
+    public float swingDelay = 4f;
 
+    [HideInInspector]
+    public bool isSwinging;
+
+    public Transform shootPoint;
     public Collider2D staffHitbox;
-
-    void Start()
-    {
-        staffHitbox = GetComponent<Collider2D>();
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision.name);
-        HealthComponent health = collision.GetComponent<HealthComponent>();
-        if (health)
+        if (collision.CompareTag("Enemy"))
         {
-            health.GetHit(staffDamage, transform.root.gameObject);
+            HealthComponent health = collision.GetComponent<HealthComponent>();
+            if (health)
+            {
+                health.GetHit(staffDamage, staffKnockbackForce, transform.root.gameObject);
+            }
         }
     }
 }

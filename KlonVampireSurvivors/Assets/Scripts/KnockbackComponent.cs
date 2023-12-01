@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,16 +7,17 @@ public class KnockbackComponent : MonoBehaviour
 {
     private Rigidbody2D rb;
     public float knockbackDuration = 0.2f;
-    public float knockbackForce = 10f;
+    public float defaultKnockbackForce = 5f;
 
-    public UnityEvent OnStart, OnEnd;
+    public UnityEvent OnStart;
+    public UnityEvent OnEnd;
 
-    public void Start()
+    void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void ApplyKnockback(GameObject sender)
+    public void ApplyKnockback(GameObject sender, float knockbackForce)
     {
         StopAllCoroutines();
         OnStart?.Invoke();
@@ -32,5 +32,4 @@ public class KnockbackComponent : MonoBehaviour
         rb.velocity = Vector3.zero;
         OnEnd?.Invoke();
     }
-
 }

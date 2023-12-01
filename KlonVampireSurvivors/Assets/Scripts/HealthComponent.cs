@@ -10,8 +10,15 @@ public class HealthComponent : MonoBehaviour
     [SerializeField]
     private int currentHealth;
     private bool isDead;
+    private KnockbackComponent knockbackComponent;
 
-    public UnityEvent<GameObject> OnHit, OnDeath;
+    public UnityEvent OnHit;
+    public UnityEvent OnDeath;
+
+    void Start()
+    {
+        knockbackComponent = GetComponent<KnockbackComponent>();
+    }
 
     public void HealthSetup(int health)
     {
@@ -20,7 +27,7 @@ public class HealthComponent : MonoBehaviour
         isDead = false;
     }
 
-    public void GetHit(int damage, GameObject sender)
+    public void GetHit(int damage, float knockbackForce, GameObject sender)
     {
         if (isDead)
         {
@@ -31,18 +38,23 @@ public class HealthComponent : MonoBehaviour
             return;
         }
 
+
         currentHealth -= damage;
+
+        if (knockbackComponent)
+        {
+            knockbackComponent.ApplyKnockback(sender, knockbackForce);
+        }
 
         if (currentHealth > 0) 
         {
-            OnHit?.Invoke(sender);
+            OnHit?.Invoke();
         }
         else
         {
-            OnDeath?.Invoke(sender);
+            OnDeath?.Invoke();
             isDead = true;
             Destroy(gameObject);
         }
     }
-
 }
