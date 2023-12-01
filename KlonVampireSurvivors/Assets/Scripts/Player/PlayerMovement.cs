@@ -13,14 +13,21 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 cursorPosition;
 
-    Vector2 movementDirection;
+    public Vector2 movementDirection;
+    [HideInInspector]
+    public Vector2 lastMovementDirection;
 
-    private void Update()
+    void Start()
+    {
+        lastMovementDirection = transform.right;    
+    }
+
+    void Update()
     {
         weaponPoint.cursorPosition = cursorPosition;
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         rb.MovePosition(rb.position + movementDirection * movementSpeed * Time.fixedDeltaTime);
     }
@@ -32,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Vertical", movementDirection.y);
         if (movementDirection.sqrMagnitude > 0)
         {
+            lastMovementDirection = movementDirection;
             animator.SetBool("IsMoving", true);
         }
         else
@@ -45,10 +53,5 @@ public class PlayerMovement : MonoBehaviour
         Vector3 mousePosition = Mouse.current.position.ReadValue();
         mousePosition.z = Camera.main.nearClipPlane;
         cursorPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-    }
-
-    void OnAltFire()
-    { 
-        weaponPoint.SwingStaff();
     }
 }
