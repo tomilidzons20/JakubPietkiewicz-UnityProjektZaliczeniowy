@@ -22,7 +22,18 @@ public class EnemyMovement : MonoBehaviour
 
     void MoveTowardsPlayer()
     {
-        Vector2 direction = (player.transform.position - transform.position).normalized;
-        rb.MovePosition(rb.position + direction * stats.moveSpeed * Time.fixedDeltaTime);
+        if (player != null)
+        {
+            Vector2 direction = (player.transform.position - transform.position).normalized;
+            rb.MovePosition(rb.position + direction * stats.moveSpeed * Time.fixedDeltaTime);
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<HealthComponent>().GetHit(stats.damage, 0, gameObject);
+        }
     }
 }

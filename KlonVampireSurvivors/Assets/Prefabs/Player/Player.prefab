@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   staffDamage: 0
-  staffKnockbackForce: 6
+  staffKnockbackForce: 10
   swingDelay: 4
   isSwinging: 0
   shootPoint: {fileID: 1348954252726787669}
@@ -260,6 +260,7 @@ MonoBehaviour:
   knockbackForce: 0
   damage: 0
   pierce: 0
+  playerMovement: {fileID: 0}
 --- !u!1 &6002104163037334079
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,6 +279,8 @@ GameObject:
   - component: {fileID: 2993791884841742112}
   - component: {fileID: 6642810810610487683}
   - component: {fileID: 1524996365384766999}
+  - component: {fileID: 1931384842543130810}
+  - component: {fileID: 7422707629603170726}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -295,7 +298,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.59, y: -1.048, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 967368385576854523}
@@ -491,6 +494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   currentHealth: 10
+  invincibilityDuration: 0.3
   OnHit:
     m_PersistentCalls:
       m_Calls: []
@@ -509,10 +513,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84120340704df9345804ec7863ec2abb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 4
   rb: {fileID: 8352145918241651815}
   animator: {fileID: 775188833031927235}
   weaponPoint: {fileID: 2764301035340323408}
+  stats: {fileID: 1931384842543130810}
+  movementDirection: {x: 0, y: 0}
+  lastMovementDirection: {x: 0, y: 0}
 --- !u!114 &6642810810610487683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,6 +555,42 @@ MonoBehaviour:
   projectileKnockbackForce: 0
   projectileDamage: 0
   projectilePierce: 0
+--- !u!114 &1931384842543130810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6002104163037334079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f2cc280e0676b4ea7170d2f871eae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 14531b41b477bc5409a6d7807e4ae6fa, type: 2}
+  health: {fileID: 1884589266228797424}
+  moveSpeed: 0
+  maxHealth: 0
+  healthRegen: 0
+  projectileSpeed: 0
+  projectileDamage: 0
+  projectileDuration: 0
+  level: 1
+  experience: 0
+  experienceToLevel: 5
+  experienceIncrease: 10
+--- !u!114 &7422707629603170726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6002104163037334079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6aa3019f1947244fa6513f6ebf31bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6934336714696978814
 GameObject:
   m_ObjectHideFlags: 0

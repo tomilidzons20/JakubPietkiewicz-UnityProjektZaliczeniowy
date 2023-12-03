@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    public WeaponScriptable stats;
+    [SerializeField]
+    private WeaponScriptable stats;
 
     public GameObject projectile;
     public float speed;
