@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerWeaponStats : MonoBehaviour
 {
-    public WeaponScriptable data;
+    [SerializeField]
+    private WeaponScriptable data;
 
     public GameObject projectilePrefab;
     public float projectileInterval;

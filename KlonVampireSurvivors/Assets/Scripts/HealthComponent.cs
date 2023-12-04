@@ -12,6 +12,9 @@ public class HealthComponent : MonoBehaviour
     private bool isDead;
     private KnockbackComponent knockbackComponent;
 
+    public float invincibilityDuration;
+    private bool canGetHit;
+
     public UnityEvent OnHit;
     public UnityEvent OnDeath;
 
@@ -25,6 +28,19 @@ public class HealthComponent : MonoBehaviour
         maxHealth = health;
         currentHealth = health;
         isDead = false;
+        canGetHit = true;
+    }
+
+    public void Heal(int heal)
+    {
+        if (currentHealth < maxHealth)
+        {
+            currentHealth += heal;
+            if (currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }   
+        }
     }
 
     public void GetHit(int damage, float knockbackForce, GameObject sender)
@@ -37,8 +53,12 @@ public class HealthComponent : MonoBehaviour
         {
             return;
         }
+        if (!canGetHit)
+        {
+            return;
+        }
 
-
+        StartCoroutine(IFrames());
         currentHealth -= damage;
 
         if (knockbackComponent)
@@ -56,5 +76,12 @@ public class HealthComponent : MonoBehaviour
             isDead = true;
             Destroy(gameObject);
         }
+    }
+
+    private IEnumerator IFrames()
+    {
+        canGetHit = false;
+        yield return new WaitForSeconds(invincibilityDuration);
+        canGetHit = true;
     }
 }

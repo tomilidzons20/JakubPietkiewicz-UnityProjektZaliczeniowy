@@ -5,14 +5,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float movementSpeed = 4f;
-
     public Rigidbody2D rb;
     public Animator animator;
     public WeaponPoint weaponPoint;
+    public PlayerStats stats;
 
     Vector2 cursorPosition;
 
+    // Movement
     public Vector2 movementDirection;
     [HideInInspector]
     public Vector2 lastMovementDirection;
@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movementDirection * movementSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movementDirection * stats.moveSpeed * Time.fixedDeltaTime);
     }
 
     void OnMove(InputValue movementValue)

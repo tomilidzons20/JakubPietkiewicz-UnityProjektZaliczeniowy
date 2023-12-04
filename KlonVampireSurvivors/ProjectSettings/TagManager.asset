@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - ExpPickup
+  - HpPickup
   layers:
   - Default
   - TransparentFX
@@ -14,8 +16,8 @@ TagManager:
   - UI
   - Player
   - Projectiles
-  - 
-  - 
+  - Pickable
+  - Enemy
   - 
   - 
   - 
