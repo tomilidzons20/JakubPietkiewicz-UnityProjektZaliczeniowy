@@ -41,7 +41,5 @@ public class EnemyDrops : MonoBehaviour
             }
             Instantiate(finalDrop.dropPrefab, transform.position, transform.rotation);
         }
-        
-        
     }
 }

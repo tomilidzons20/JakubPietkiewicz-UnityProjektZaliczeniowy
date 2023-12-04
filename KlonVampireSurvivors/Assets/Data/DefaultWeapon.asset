@@ -16,6 +16,6 @@ MonoBehaviour:
   Speed: 8
   Interval: 0.3
   Duration: 5
-  KnockbackForce: 0.5
+  KnockbackForce: 2
   Damage: 1
   Pierce: 0

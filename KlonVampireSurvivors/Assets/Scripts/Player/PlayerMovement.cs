@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     Vector2 cursorPosition;
 
     // Movement
+    [HideInInspector]
     public Vector2 movementDirection;
     [HideInInspector]
     public Vector2 lastMovementDirection;
@@ -24,12 +25,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        // Add OnLook cause in new input system mouse position only updates on mouse movement and it bugs out cursor position
+        OnLook();
         weaponPoint.cursorPosition = cursorPosition;
     }
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movementDirection * stats.moveSpeed * Time.fixedDeltaTime);
+        rb.velocity = movementDirection * stats.moveSpeed;
     }
 
     void OnMove(InputValue movementValue)

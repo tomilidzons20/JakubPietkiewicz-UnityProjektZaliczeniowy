@@ -12,7 +12,7 @@ public class PlayerPickups : MonoBehaviour
         {
             Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
             Vector2 direction = (transform.position - rb.transform.position).normalized;
-            rb.MovePosition(rb.position + direction * pullSpeed * Time.fixedDeltaTime);
+            rb.velocity = direction * pullSpeed;
         }
     }
 }
