@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 4
   MaxHealth: 10
-  HealthRegen: 0
+  HealthRegen: 5
   ProjectileSpeed: 0
   ProjectileDamage: 0
   ProjectileDuration: 0

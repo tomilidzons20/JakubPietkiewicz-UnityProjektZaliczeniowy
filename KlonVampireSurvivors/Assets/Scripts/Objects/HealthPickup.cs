@@ -10,6 +10,14 @@ public class HealthPickup : MonoBehaviour
     {
         PlayerStats stats = FindObjectOfType<PlayerStats>();
         stats.health.Heal(healAmount);
-        Destroy(gameObject);
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            Collect();
+            Destroy(gameObject);
+        }
     }
 }

@@ -10,6 +10,14 @@ public class ExperiencePickup : MonoBehaviour
     {
         PlayerStats stats = FindObjectOfType<PlayerStats>();
         stats.AddExp(experienceAmount);
-        Destroy(gameObject);
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            Collect();
+            Destroy(gameObject);
+        }
     }
 }

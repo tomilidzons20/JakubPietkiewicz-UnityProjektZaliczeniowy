@@ -13,7 +13,7 @@ public class PlayerScriptable : ScriptableObject
     int MaxHealth;
     public int maxHealth { get => MaxHealth; private set => MaxHealth = value; }
 
-    // Hp/10sec
+    // 1HP per x seconds
     [SerializeField]
     int HealthRegen;
     public int healthRegen { get => HealthRegen; private set => HealthRegen = value; }

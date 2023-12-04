@@ -23,6 +23,8 @@ public class PlayerStats : MonoBehaviour
     public int experienceToLevel = 5;
     public int experienceIncrease = 10;
 
+    private bool canHeal = true;
+
     void Awake()
     {
         moveSpeed = data.moveSpeed;
@@ -32,6 +34,11 @@ public class PlayerStats : MonoBehaviour
         projectileDamage = data.projectileDamage;
         projectileDuration = data.projectileDuration;
         health.HealthSetup(data.maxHealth);
+    }
+
+    void Update()
+    {
+        HealthRegen();
     }
 
     public void AddExp(int exp)
@@ -48,5 +55,21 @@ public class PlayerStats : MonoBehaviour
             experience -= experienceToLevel;
             experienceToLevel += experienceIncrease;
         }
+    }
+
+    public void HealthRegen()
+    {
+        if(healthRegen > 0 && canHeal)
+        {
+            health.Heal(1);
+            StartCoroutine(HealInterval());
+        }
+    }
+
+    private IEnumerator HealInterval()
+    {
+        canHeal = false;
+        yield return new WaitForSeconds(healthRegen);
+        canHeal = true;
     }
 }
