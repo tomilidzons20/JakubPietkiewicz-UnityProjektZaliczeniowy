@@ -7,14 +7,16 @@ public class PlayerStats : MonoBehaviour
     [SerializeField]
     private PlayerScriptable data;
     public HealthComponent health;
+    public GameObject levelUpMenu;
 
+    [Space(10)]
     // Stats
     public float moveSpeed;
-    public int maxHealth;
-    public int healthRegen;
+    public float healthRegen;
     public float projectileSpeed;
-    public float projectileDamage;
+    public int projectileDamage;
     public float projectileDuration;
+    public int projectilePierce;
 
     [Space(10)]
     // Levels
@@ -28,11 +30,11 @@ public class PlayerStats : MonoBehaviour
     void Awake()
     {
         moveSpeed = data.moveSpeed;
-        maxHealth = data.maxHealth;
         healthRegen = data.healthRegen;
         projectileSpeed = data.projectileSpeed;
         projectileDamage = data.projectileDamage;
         projectileDuration = data.projectileDuration;
+        projectilePierce = data.projectilePierce;
         health.HealthSetup(data.maxHealth);
     }
 
@@ -54,6 +56,8 @@ public class PlayerStats : MonoBehaviour
             level += 1;
             experience -= experienceToLevel;
             experienceToLevel += experienceIncrease;
+            health.maxHealth = level + data.maxHealth;
+            OpenLevelUpMenu();
         }
     }
 
@@ -71,5 +75,52 @@ public class PlayerStats : MonoBehaviour
         canHeal = false;
         yield return new WaitForSeconds(healthRegen);
         canHeal = true;
+    }
+
+    public void UpgradeStats(string stat)
+    {
+        switch (stat)
+        {
+            case "moveSpeed":
+                moveSpeed *= 1.1f;
+                break;
+            case "healthRegen":
+                healthRegen -= 0.1f;
+                if (healthRegen < 1f)
+                {
+                    healthRegen = 1f;
+                }
+                break;
+            case "projectileDamage":
+                projectileDamage += 1;
+                break;
+            case "projectileSpeed":
+                projectileSpeed += 25f;
+                break;
+            case "projectileDuration":
+                projectileDuration += 25f;
+                break;
+            case "projectilePierce":
+                projectilePierce += 1;
+                break;
+        }
+        CloseLevelUpMenu();
+    }
+
+    public void OpenLevelUpMenu()
+    {
+
+        levelUpMenu.SetActive(true);
+        Time.timeScale = 0;
+        PauseMenu.GameIsPaused = true;
+        PauseMenu.PlayerLevelUps = true;
+    }
+
+    public void CloseLevelUpMenu()
+    {
+        levelUpMenu.SetActive(false);
+        Time.timeScale = 1;
+        PauseMenu.GameIsPaused = false;
+        PauseMenu.PlayerLevelUps = false;
     }
 }

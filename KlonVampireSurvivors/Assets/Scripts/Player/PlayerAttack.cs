@@ -50,6 +50,7 @@ public class PlayerAttack : MonoBehaviour
         {
             return;
         }
+        weaponStats.UpdateStats();
         GameObject projectile = Instantiate(weaponStats.projectilePrefab, staff.shootPoint.position, weaponPoint.transform.rotation);
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
         rb.velocity = weaponStats.projectileSpeed * weaponPoint.transform.right;
@@ -62,7 +63,6 @@ public class PlayerAttack : MonoBehaviour
             return;
         }
         staffAnimator.SetTrigger("Swing");
-        StartCoroutine(SwingDelay());
     }
 
     IEnumerator ShootInterval()
@@ -71,10 +71,4 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitForSeconds(weaponStats.projectileInterval);
         shootOnCooldown = false;
     }
-
-    IEnumerator SwingDelay()
-    {
-        yield return new WaitForSeconds(staff.swingDelay);
-    }
-
 }

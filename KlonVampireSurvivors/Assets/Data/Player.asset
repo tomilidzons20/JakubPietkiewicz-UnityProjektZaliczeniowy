@@ -18,3 +18,4 @@ MonoBehaviour:
   ProjectileSpeed: 0
   ProjectileDamage: 0
   ProjectileDuration: 0
+  ProjectilePierce: 0

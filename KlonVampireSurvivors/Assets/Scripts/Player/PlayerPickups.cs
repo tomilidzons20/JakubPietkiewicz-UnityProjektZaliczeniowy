@@ -8,7 +8,7 @@ public class PlayerPickups : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("ExpPickup") || collision.CompareTag("HpPickup"))
+        if (collision.CompareTag("ExpPickup"))
         {
             Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
             Vector2 direction = (transform.position - rb.transform.position).normalized;

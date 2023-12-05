@@ -15,21 +15,26 @@ public class PlayerScriptable : ScriptableObject
 
     // 1HP per x seconds
     [SerializeField]
-    int HealthRegen;
-    public int healthRegen { get => HealthRegen; private set => HealthRegen = value; }
+    float HealthRegen;
+    public float healthRegen { get => HealthRegen; private set => HealthRegen = value; }
 
     // % bonus speed
     [SerializeField]
     float ProjectileSpeed;
     public float projectileSpeed { get => ProjectileSpeed; private set => ProjectileSpeed = value; }
 
-    // % bonus damage
+    // + bonus damage
     [SerializeField]
-    float ProjectileDamage;
-    public float projectileDamage { get => ProjectileDamage; private set => ProjectileDamage = value; }
+    int ProjectileDamage;
+    public int projectileDamage { get => ProjectileDamage; private set => ProjectileDamage = value; }
 
     // % bonus duration
     [SerializeField]
     float ProjectileDuration;
     public float projectileDuration { get => ProjectileDuration; private set => ProjectileDuration = value; }
+
+    // + bonus pierce
+    [SerializeField]
+    int ProjectilePierce;
+    public int projectilePierce { get => ProjectilePierce; private set => ProjectilePierce = value; }
 }

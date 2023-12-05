@@ -207,59 +207,6 @@ MonoBehaviour:
   isSwinging: 0
   shootPoint: {fileID: 1348954252726787669}
   staffHitbox: {fileID: 6049424653910756420}
---- !u!1 &5889154578022931498
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3139198449363494282}
-  - component: {fileID: 552731891715564329}
-  m_Layer: 6
-  m_Name: WaterWaveController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3139198449363494282
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5889154578022931498}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1694444346128598273}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &552731891715564329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5889154578022931498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3974c2bc3bf58a14a8daa9bc0cf557fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 067898bd4361b9a4484a52ef4dc756e7, type: 2}
-  projectile: {fileID: 6731771176636098229, guid: b8ba5f56b243cb243b8a5c2ea508d083, type: 3}
-  speed: 0
-  interval: 0
-  duration: 0
-  knockbackForce: 0
-  damage: 0
-  pierce: 0
-  playerMovement: {fileID: 0}
 --- !u!1 &6002104163037334079
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +247,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 967368385576854523}
-  - {fileID: 3139198449363494282}
   - {fileID: 2566675592099678336}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -568,12 +514,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 14531b41b477bc5409a6d7807e4ae6fa, type: 2}
   health: {fileID: 1884589266228797424}
+  levelUpMenu: {fileID: 0}
   moveSpeed: 0
-  maxHealth: 0
   healthRegen: 0
   projectileSpeed: 0
   projectileDamage: 0
   projectileDuration: 0
+  projectilePierce: 0
   level: 1
   experience: 0
   experienceToLevel: 5

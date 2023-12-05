@@ -5,10 +5,8 @@ using UnityEngine.Events;
 
 public class HealthComponent : MonoBehaviour
 {
-    [SerializeField]
-    private int maxHealth;
-    [SerializeField]
-    private int currentHealth;
+    public int maxHealth;
+    public int currentHealth;
     private bool isDead;
     private KnockbackComponent knockbackComponent;
 

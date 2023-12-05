@@ -37,24 +37,37 @@ public class PlayerMovement : MonoBehaviour
 
     void OnMove(InputValue movementValue)
     {
-        movementDirection = movementValue.Get<Vector2>().normalized;
-        animator.SetFloat("Horizontal", movementDirection.x);
-        animator.SetFloat("Vertical", movementDirection.y);
-        if (movementDirection.sqrMagnitude > 0)
+        if (!PauseMenu.GameIsPaused)
         {
-            lastMovementDirection = movementDirection;
-            animator.SetBool("IsMoving", true);
+            movementDirection = movementValue.Get<Vector2>().normalized;
+            animator.SetFloat("Horizontal", movementDirection.x);
+            animator.SetFloat("Vertical", movementDirection.y);
+            if (movementDirection.sqrMagnitude > 0)
+            {
+                lastMovementDirection = movementDirection;
+                animator.SetBool("IsMoving", true);
+            }
+            else
+            {
+                animator.SetBool("IsMoving", false);
+            }
         }
         else
         {
+            // Prevent movement when button held down and then paused
+            // Player used to move without input in last direction
+            movementDirection = Vector2.zero;
             animator.SetBool("IsMoving", false);
         }
     }
 
     void OnLook()
     {
-        Vector3 mousePosition = Mouse.current.position.ReadValue();
-        mousePosition.z = Camera.main.nearClipPlane;
-        cursorPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        if (!PauseMenu.GameIsPaused)
+        {
+            Vector3 mousePosition = Mouse.current.position.ReadValue();
+            mousePosition.z = Camera.main.nearClipPlane;
+            cursorPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        }
     }
 }
