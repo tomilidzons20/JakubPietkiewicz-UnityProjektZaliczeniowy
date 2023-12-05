@@ -25,7 +25,7 @@ public class EnemyMovement : MonoBehaviour
         if (player != null)
         {
             Vector2 direction = (player.transform.position - transform.position).normalized;
-            rb.MovePosition(rb.position + direction * stats.moveSpeed * Time.fixedDeltaTime);
+            rb.velocity = direction * stats.moveSpeed;
         }
     }
 

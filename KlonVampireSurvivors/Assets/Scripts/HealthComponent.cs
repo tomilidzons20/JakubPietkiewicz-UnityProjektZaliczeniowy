@@ -21,6 +21,7 @@ public class HealthComponent : MonoBehaviour
     void Start()
     {
         knockbackComponent = GetComponent<KnockbackComponent>();
+        canGetHit = true;
     }
 
     public void HealthSetup(int health)
@@ -28,7 +29,6 @@ public class HealthComponent : MonoBehaviour
         maxHealth = health;
         currentHealth = health;
         isDead = false;
-        canGetHit = true;
     }
 
     public void Heal(int heal)
@@ -58,7 +58,10 @@ public class HealthComponent : MonoBehaviour
             return;
         }
 
-        StartCoroutine(IFrames());
+        if (invincibilityDuration > 0)
+        {
+            StartCoroutine(IFrames());
+        }
         currentHealth -= damage;
 
         if (knockbackComponent)

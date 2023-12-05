@@ -18,7 +18,7 @@ TagManager:
   - Projectiles
   - Pickable
   - Enemy
-  - 
+  - Fence
   - 
   - 
   - 
@@ -43,4 +43,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 1631412315
     locked: 0

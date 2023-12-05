@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class Staff : MonoBehaviour
 {
-    public int staffDamage = 0;
-    public float staffKnockbackForce = 6f;
+    public float staffKnockbackForce = 10f;
     public float swingDelay = 4f;
 
     [HideInInspector]
@@ -22,7 +21,7 @@ public class Staff : MonoBehaviour
             HealthComponent health = collision.GetComponent<HealthComponent>();
             if (health)
             {
-                health.GetHit(staffDamage, staffKnockbackForce, transform.root.gameObject);
+                health.GetHit(0, staffKnockbackForce, transform.root.gameObject);
             }
         }
     }
