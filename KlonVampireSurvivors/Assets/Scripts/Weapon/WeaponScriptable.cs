@@ -20,14 +20,10 @@ public class WeaponScriptable : ScriptableObject
     [SerializeField]
     float Duration;
     public float duration { get => Duration; private set => Duration = value; }
-
-    [SerializeField]
-    float KnockbackForce;
-    public float knockbackForce { get => KnockbackForce; private set => KnockbackForce = value; }
     
     [SerializeField]
-    int Damage;
-    public int damage { get => Damage; private set => Damage = value; }
+    float Damage;
+    public float damage { get => Damage; private set => Damage = value; }
 
     [SerializeField]
     int Pierce;

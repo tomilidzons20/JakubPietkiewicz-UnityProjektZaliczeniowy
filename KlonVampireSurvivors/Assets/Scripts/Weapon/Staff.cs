@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class Staff : MonoBehaviour
 {
-    public float staffKnockbackForce = 10f;
-    public float swingDelay = 4f;
+    public float staffKnockbackForce = 15f;
 
     [HideInInspector]
     public bool isSwinging;

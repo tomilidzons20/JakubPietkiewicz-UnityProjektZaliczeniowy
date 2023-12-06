@@ -7,14 +7,16 @@ public class PlayerStats : MonoBehaviour
     [SerializeField]
     private PlayerScriptable data;
     public HealthComponent health;
+    public LevelUpMenu levelUpMenu;
 
+    [Space(10)]
     // Stats
     public float moveSpeed;
-    public int maxHealth;
-    public int healthRegen;
+    public float healthRegen;
     public float projectileSpeed;
     public float projectileDamage;
     public float projectileDuration;
+    public int projectilePierce;
 
     [Space(10)]
     // Levels
@@ -28,11 +30,11 @@ public class PlayerStats : MonoBehaviour
     void Awake()
     {
         moveSpeed = data.moveSpeed;
-        maxHealth = data.maxHealth;
         healthRegen = data.healthRegen;
         projectileSpeed = data.projectileSpeed;
         projectileDamage = data.projectileDamage;
         projectileDuration = data.projectileDuration;
+        projectilePierce = data.projectilePierce;
         health.HealthSetup(data.maxHealth);
     }
 
@@ -51,9 +53,11 @@ public class PlayerStats : MonoBehaviour
     {
         if (experience >= experienceToLevel) 
         {
-            level += 1;
+            level++;
             experience -= experienceToLevel;
             experienceToLevel += experienceIncrease;
+            health.maxHealth = level + data.maxHealth;
+            levelUpMenu.OpenLevelUpMenu();
         }
     }
 
@@ -72,4 +76,36 @@ public class PlayerStats : MonoBehaviour
         yield return new WaitForSeconds(healthRegen);
         canHeal = true;
     }
+
+    public void UpgradeStats(string stat)
+    {
+        switch (stat)
+        {
+            case "moveSpeed":
+                moveSpeed *= 1.25f;
+                break;
+            case "healthRegen":
+                healthRegen -= 0.1f;
+                if (healthRegen < 1f)
+                {
+                    healthRegen = 1f;
+                }
+                break;
+            case "projectileDamage":
+                projectileDamage += 25f;
+                break;
+            case "projectileSpeed":
+                projectileSpeed += 25f;
+                break;
+            case "projectileDuration":
+                projectileDuration += 25f;
+                break;
+            case "projectilePierce":
+                projectilePierce++;
+                break;
+        }
+        levelUpMenu.CloseLevelUpMenu();
+    }
+
+    
 }

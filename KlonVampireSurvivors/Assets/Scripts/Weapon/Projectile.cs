@@ -7,9 +7,9 @@ public class Projectile : MonoBehaviour
     private PlayerWeaponStats stats;
     private int currentPierce;
 
-    void Start()
+    void Awake()
     {
-        stats = FindObjectOfType<PlayerAttack>().weaponStats;
+        stats = FindObjectOfType<PlayerWeaponStats>();
         currentPierce = stats.projectilePierce;
         Destroy(gameObject, stats.projectileDuration);
     }
@@ -21,13 +21,18 @@ public class Projectile : MonoBehaviour
             HealthComponent health = collision.GetComponent<HealthComponent>();
             if (health)
             {
-                health.GetHit(stats.projectileDamage, stats.projectileKnockbackForce, transform.root.gameObject);
+                health.GetHit(stats.projectileDamage, 0, stats.gameObject);
             }
-            currentPierce -= 1;
-            if (currentPierce < 0)
-            {
-                Destroy(gameObject);
-            }
+            PierceHandler();
+        }
+    }
+
+    void PierceHandler()
+    {
+        currentPierce -= 1;
+        if (currentPierce < 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

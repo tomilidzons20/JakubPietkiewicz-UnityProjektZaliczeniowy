@@ -5,10 +5,8 @@ using UnityEngine.Events;
 
 public class HealthComponent : MonoBehaviour
 {
-    [SerializeField]
-    private int maxHealth;
-    [SerializeField]
-    private int currentHealth;
+    public float maxHealth;
+    public float currentHealth;
     private bool isDead;
     private KnockbackComponent knockbackComponent;
 
@@ -24,14 +22,14 @@ public class HealthComponent : MonoBehaviour
         canGetHit = true;
     }
 
-    public void HealthSetup(int health)
+    public void HealthSetup(float health)
     {
         maxHealth = health;
         currentHealth = health;
         isDead = false;
     }
 
-    public void Heal(int heal)
+    public void Heal(float heal)
     {
         if (currentHealth < maxHealth)
         {
@@ -43,7 +41,7 @@ public class HealthComponent : MonoBehaviour
         }
     }
 
-    public void GetHit(int damage, float knockbackForce, GameObject sender)
+    public void GetHit(float damage, float knockbackForce, GameObject sender)
     {
         if (isDead)
         {
