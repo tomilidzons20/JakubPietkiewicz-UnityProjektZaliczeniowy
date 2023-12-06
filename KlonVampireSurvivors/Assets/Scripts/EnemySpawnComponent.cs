@@ -28,6 +28,7 @@ public class EnemySpawnComponent : MonoBehaviour
     private bool addWave;
     private float spawnInterval = 1f;
     private float waveInterval = 30f;
+    public GameState gameState;
 
     private void Start()
     {
@@ -51,11 +52,12 @@ public class EnemySpawnComponent : MonoBehaviour
     public void AddWave()
     {
         // Increment current wave
-        currentWave += 1;
+        currentWave++;
         // Check if it is last wave and stop spawning
-        if (currentWave >= waves.Count)
+        if (currentWave == waves.Count)
         {
             canSpawn = false;
+            gameState.Victory();
             return;
         }
         else
@@ -90,8 +92,8 @@ public class EnemySpawnComponent : MonoBehaviour
                     // Get random spawnPoint
                     Transform spawnPosition = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
                     Instantiate(spawn.enemyPrefab, spawnPosition.position, spawnPosition.rotation);
-                    spawn.spawned += 1;
-                    wave.totalSpawned += 1;
+                    spawn.spawned++;
+                    wave.totalSpawned++;
                 }
             }
         }

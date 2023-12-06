@@ -6,14 +6,14 @@ using UnityEngine;
 public class EnemyScriptable : ScriptableObject
 {
     [SerializeField]
-    int MaxHealth;
-    public int maxHealth { get => MaxHealth; private set => MaxHealth = value; }
+    float MaxHealth;
+    public float maxHealth { get => MaxHealth; private set => MaxHealth = value; }
 
     [SerializeField]
     float MoveSpeed;
     public float moveSpeed { get => MoveSpeed; private set => MoveSpeed = value; }
 
     [SerializeField]
-    int Damage;
-    public int damage { get => Damage; private set => Damage = value; }
+    float Damage;
+    public float damage { get => Damage; private set => Damage = value; }
 }

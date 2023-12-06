@@ -55,9 +55,9 @@ public class PauseMenu : MonoBehaviour
             playerStatsText.text = 
                 $"HP: {playerStats.health.currentHealth} / {playerStats.health.maxHealth}\n" +
                 $"+1HP / {playerStats.healthRegen}s\n" +
-                $"MoveSpeed: {playerStats.moveSpeed}\n" +
-                $"\nProjectiles:\n" +
-                $"Damage: {playerStats.projectileDamage}\n" +
+                $"EXP: {playerStats.experience}/{playerStats.experienceToLevel}\n" +
+                $"MoveSpeed: {playerStats.moveSpeed}\n\n" +
+                $"Damage: {playerStats.projectileDamage}%\n" +
                 $"Speed: {playerStats.projectileSpeed}%\n" +
                 $"Duration: {playerStats.projectileDuration}%\n" +
                 $"Pierce: {playerStats.projectilePierce} \n";

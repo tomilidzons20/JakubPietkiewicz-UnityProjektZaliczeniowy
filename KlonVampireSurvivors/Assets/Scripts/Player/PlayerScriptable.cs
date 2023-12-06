@@ -10,8 +10,8 @@ public class PlayerScriptable : ScriptableObject
     public float moveSpeed { get => MoveSpeed; private set => MoveSpeed = value; }
 
     [SerializeField]
-    int MaxHealth;
-    public int maxHealth { get => MaxHealth; private set => MaxHealth = value; }
+    float MaxHealth;
+    public float maxHealth { get => MaxHealth; private set => MaxHealth = value; }
 
     // 1HP per x seconds
     [SerializeField]
@@ -25,8 +25,8 @@ public class PlayerScriptable : ScriptableObject
 
     // + bonus damage
     [SerializeField]
-    int ProjectileDamage;
-    public int projectileDamage { get => ProjectileDamage; private set => ProjectileDamage = value; }
+    float ProjectileDamage;
+    public float projectileDamage { get => ProjectileDamage; private set => ProjectileDamage = value; }
 
     // % bonus duration
     [SerializeField]

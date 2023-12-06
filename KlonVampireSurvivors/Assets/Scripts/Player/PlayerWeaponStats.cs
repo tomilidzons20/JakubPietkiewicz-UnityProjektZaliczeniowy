@@ -12,7 +12,7 @@ public class PlayerWeaponStats : MonoBehaviour
     public float projectileInterval;
     public float projectileSpeed;
     public float projectileDuration;
-    public int projectileDamage;
+    public float projectileDamage;
     public int projectilePierce;
 
     void Awake()
@@ -27,7 +27,7 @@ public class PlayerWeaponStats : MonoBehaviour
     {
         projectileSpeed = data.speed * (1 + playerStats.projectileSpeed/100);
         projectileDuration = data.duration * (1 + playerStats.projectileDuration/100);
-        projectileDamage = data.damage + playerStats.projectileDamage;
+        projectileDamage = data.damage * (1 + playerStats.projectileDamage/100);
         projectilePierce = data.pierce + playerStats.projectilePierce;
     }
 }

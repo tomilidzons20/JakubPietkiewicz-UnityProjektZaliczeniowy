@@ -14,7 +14,7 @@ public class PlayerStats : MonoBehaviour
     public float moveSpeed;
     public float healthRegen;
     public float projectileSpeed;
-    public int projectileDamage;
+    public float projectileDamage;
     public float projectileDuration;
     public int projectilePierce;
 
@@ -53,7 +53,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (experience >= experienceToLevel) 
         {
-            level += 1;
+            level++;
             experience -= experienceToLevel;
             experienceToLevel += experienceIncrease;
             health.maxHealth = level + data.maxHealth;
@@ -92,7 +92,7 @@ public class PlayerStats : MonoBehaviour
                 }
                 break;
             case "projectileDamage":
-                projectileDamage += 1;
+                projectileDamage += 25f;
                 break;
             case "projectileSpeed":
                 projectileSpeed += 25f;
@@ -101,7 +101,7 @@ public class PlayerStats : MonoBehaviour
                 projectileDuration += 25f;
                 break;
             case "projectilePierce":
-                projectilePierce += 1;
+                projectilePierce++;
                 break;
         }
         levelUpMenu.CloseLevelUpMenu();

@@ -7,9 +7,9 @@ public class EnemyStats : MonoBehaviour
     [SerializeField]
     private EnemyScriptable data;
 
-    public int health;
+    public float health;
     public float moveSpeed;
-    public int damage;
+    public float damage;
 
     void Awake()
     {
