@@ -16,6 +16,12 @@ public class PlayerAttack : MonoBehaviour
     private bool canShoot;
 
     private bool shootOnCooldown;
+    private AudioManager audioManager;
+
+    void Start()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
 
     void Update()
     {
@@ -52,6 +58,7 @@ public class PlayerAttack : MonoBehaviour
         }
         weaponStats.UpdateStats();
         GameObject projectile = Instantiate(weaponStats.projectilePrefab, staff.shootPoint.position, weaponPoint.transform.rotation);
+        audioManager.Play("Shoot");
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
         rb.velocity = weaponStats.projectileSpeed * weaponPoint.transform.right;
         StartCoroutine(ShootInterval());
