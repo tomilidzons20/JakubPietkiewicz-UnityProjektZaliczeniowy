@@ -15,11 +15,13 @@ public class HealthComponent : MonoBehaviour
 
     public UnityEvent OnHit;
     public UnityEvent OnDeath;
+    private AudioManager audioManager;
 
     void Start()
     {
         knockbackComponent = GetComponent<KnockbackComponent>();
         canGetHit = true;
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     public void HealthSetup(float health)
@@ -70,9 +72,14 @@ public class HealthComponent : MonoBehaviour
         if (currentHealth > 0) 
         {
             OnHit?.Invoke();
+            if (damage > 0)
+            {
+                audioManager.Play("Hit");
+            }
         }
         else
         {
+            audioManager.Play("Death");
             OnDeath?.Invoke();
             isDead = true;
             Destroy(gameObject);

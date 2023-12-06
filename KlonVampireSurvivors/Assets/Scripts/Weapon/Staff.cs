@@ -12,11 +12,18 @@ public class Staff : MonoBehaviour
 
     public Transform shootPoint;
     public Collider2D staffHitbox;
+    private AudioManager audioManager;
+
+    void Start()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {
+            audioManager.Play("Bonk");
             HealthComponent health = collision.GetComponent<HealthComponent>();
             if (health)
             {

@@ -171,9 +171,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7400da88897b59e4a8efe6f3410d892b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 1cbd7f2d53e5f1540bf5b4c77e3c8cc0, type: 2}
-  damage: 0
-  speed: 0
-  pierce: 0
-  knockbackForce: 0
-  duration: 0
