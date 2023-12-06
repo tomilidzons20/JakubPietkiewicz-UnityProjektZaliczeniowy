@@ -7,7 +7,7 @@ using TMPro;
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
-    public static bool PlayerLevelUps = false;
+    public static bool canPause = true;
 
     public GameObject pauseMenu;
 
@@ -17,7 +17,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if(PlayerLevelUps)
+        if(!canPause)
         {
             return;
         }
@@ -37,15 +37,13 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenu.SetActive(false);
-        Time.timeScale = 1;
-        GameIsPaused = false;
+        StartTime();
     }
 
-    void Pause()
+    public void Pause()
     {
         pauseMenu.SetActive(true);
-        Time.timeScale = 0;
-        GameIsPaused = true;
+        StopTime();
         UpdateStatsInfo();
     }
 
@@ -66,9 +64,22 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void StopTime()
+    {
+        Time.timeScale = 0;
+        GameIsPaused = true;
+    }
+
+    public void StartTime()
+    {
+        Time.timeScale = 1;
+        GameIsPaused = false;
+    }
+
     public void LoadMenu()
     {
         Resume();
+        canPause = true;
         SceneManager.LoadScene("MenuScene");
     }
 }

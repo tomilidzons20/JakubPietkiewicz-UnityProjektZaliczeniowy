@@ -12,7 +12,6 @@ public class PlayerWeaponStats : MonoBehaviour
     public float projectileInterval;
     public float projectileSpeed;
     public float projectileDuration;
-    public float projectileKnockbackForce;
     public int projectileDamage;
     public int projectilePierce;
 
@@ -21,7 +20,6 @@ public class PlayerWeaponStats : MonoBehaviour
         playerStats = FindObjectOfType<PlayerStats>();
         projectilePrefab = data.projectile;
         projectileInterval = data.interval;
-        projectileKnockbackForce = data.knockbackForce;
         UpdateStats();
     }
 
