@@ -17,7 +17,7 @@ public class ExperiencePickup : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Collect();
-            FindObjectOfType<AudioManager>().Play("Pickup");
+            AudioManager.instance.Play("Pickup");
             Destroy(gameObject);
         }
     }

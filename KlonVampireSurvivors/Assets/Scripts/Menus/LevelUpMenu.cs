@@ -5,26 +5,25 @@ using UnityEngine;
 public class LevelUpMenu : MonoBehaviour
 {
     public GameObject levelUpMenu;
-    public PauseMenu pauseMenu;
     private AudioManager audioManager;
 
     void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = AudioManager.instance;
     }
 
     public void OpenLevelUpMenu()
     {
         audioManager.Play("LevelUp");
         levelUpMenu.SetActive(true);
-        pauseMenu.StopTime();
-        PauseMenu.canPause = false;
+        GameState.PauseGame();
+        GameState.canPause = false;
     }
 
     public void CloseLevelUpMenu()
     {
         levelUpMenu.SetActive(false);
-        pauseMenu.StartTime();
-        PauseMenu.canPause = true;
+        GameState.ResumeGame();
+        GameState.canPause = true;
     }
 }

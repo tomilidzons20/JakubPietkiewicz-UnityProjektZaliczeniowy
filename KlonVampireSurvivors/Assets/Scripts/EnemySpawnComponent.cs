@@ -21,40 +21,40 @@ public class EnemySpawnComponent : MonoBehaviour
         public int spawned;
     }
 
+    public GameState gameState;
+    public WaveInfo waveInfo;
     public List<SpawnWave> waves;
     public List<Transform> spawnPoints;
+
     private int currentWave;
     private bool canSpawn = true;
-    private bool addWave;
+    // Time inbetween spawns
     private float spawnInterval = 1f;
+    // Duration of one wave
     private float waveInterval = 30f;
-    public GameState gameState;
 
     private void Start()
     {
         TotalToSpawn();
         StartCoroutine(WaveInterval());
+        // Init wave info, currentWave + 1 cause it starts from 0
+        waveInfo.SetTotalWaves(waves.Count);
+        waveInfo.SetCurrentWave(currentWave + 1);
     }
 
     void Update()
     {
-        if(addWave)
-        {
-            AddWave();
-        }
         if(canSpawn)
         {
             SpawnEnemies();
-            TotalToSpawn();
         }
     }
 
     public void AddWave()
     {
-        // Increment current wave
         currentWave++;
         // Check if it is last wave and stop spawning
-        if (currentWave == waves.Count)
+        if (currentWave >= waves.Count)
         {
             canSpawn = false;
             gameState.Victory();
@@ -62,11 +62,14 @@ public class EnemySpawnComponent : MonoBehaviour
         }
         else
         {
+            waveInfo.SetCurrentWave(currentWave + 1);
+            TotalToSpawn();
             // Start countdown for next wave
             StartCoroutine(WaveInterval());
         }
     }
 
+    // Calculate how many enemies to spawn this wave
     public void TotalToSpawn()
     {
         int spawnCount = 0;
@@ -91,7 +94,7 @@ public class EnemySpawnComponent : MonoBehaviour
                 {
                     // Get random spawnPoint
                     Transform spawnPosition = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
-                    Instantiate(spawn.enemyPrefab, spawnPosition.position, spawnPosition.rotation);
+                    Instantiate(spawn.enemyPrefab, spawnPosition.position, Quaternion.identity);
                     spawn.spawned++;
                     wave.totalSpawned++;
                 }
@@ -108,8 +111,7 @@ public class EnemySpawnComponent : MonoBehaviour
 
     IEnumerator WaveInterval()
     {
-        addWave = false;
         yield return new WaitForSeconds(waveInterval);
-        addWave = true;
+        AddWave();
     }
 }

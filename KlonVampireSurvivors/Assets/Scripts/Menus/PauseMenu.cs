@@ -6,9 +6,6 @@ using TMPro;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
-    public static bool canPause = true;
-
     public GameObject pauseMenu;
 
     public PlayerStats playerStats;
@@ -17,34 +14,34 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if(!canPause)
+        if(!GameState.canPause)
         {
             return;
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(GameIsPaused)
+            if(GameState.GameIsPaused)
             {
-                Resume();
+                ClosePauseMenu();
             }
             else
             {
-                Pause();
+                OpenPauseMenu();
             }
         }
     }
 
-    public void Resume()
-    {
-        pauseMenu.SetActive(false);
-        StartTime();
-    }
-
-    public void Pause()
+    public void OpenPauseMenu()
     {
         pauseMenu.SetActive(true);
-        StopTime();
+        GameState.PauseGame();
         UpdateStatsInfo();
+    }
+
+    public void ClosePauseMenu()
+    {
+        pauseMenu.SetActive(false);
+        GameState.ResumeGame();
     }
 
     void UpdateStatsInfo()
@@ -55,6 +52,7 @@ public class PauseMenu : MonoBehaviour
             playerStatsText.text = 
                 $"HP: {playerStats.health.currentHealth} / {playerStats.health.maxHealth}\n" +
                 $"+1HP / {playerStats.healthRegen}s\n" +
+                $"LVL: {playerStats.level}\n" +
                 $"EXP: {playerStats.experience}/{playerStats.experienceToLevel}\n" +
                 $"MoveSpeed: {playerStats.moveSpeed}\n\n" +
                 $"Damage: {playerStats.projectileDamage}%\n" +
@@ -64,22 +62,10 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    public void StopTime()
+    public void LoadMainMenu()
     {
-        Time.timeScale = 0;
-        GameIsPaused = true;
-    }
-
-    public void StartTime()
-    {
-        Time.timeScale = 1;
-        GameIsPaused = false;
-    }
-
-    public void LoadMenu()
-    {
-        Resume();
-        canPause = true;
-        SceneManager.LoadScene("MenuScene");
+        ClosePauseMenu();
+        GameState.canPause = true;
+        SceneManager.LoadScene("MainMenuScene");
     }
 }

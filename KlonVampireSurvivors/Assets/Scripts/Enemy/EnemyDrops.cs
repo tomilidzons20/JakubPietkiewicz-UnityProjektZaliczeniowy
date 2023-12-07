@@ -39,7 +39,7 @@ public class EnemyDrops : MonoBehaviour
                     finalDrop = drop;
                 }
             }
-            Instantiate(finalDrop.dropPrefab, transform.position, transform.rotation);
+            Instantiate(finalDrop.dropPrefab, transform.position, Quaternion.identity);
         }
     }
 }
