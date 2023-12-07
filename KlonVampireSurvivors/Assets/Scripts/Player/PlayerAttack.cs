@@ -20,11 +20,16 @@ public class PlayerAttack : MonoBehaviour
 
     void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = AudioManager.instance;
     }
 
     void Update()
     {
+        if (GameState.GameIsPaused)
+        {
+            return;
+        }
+
         if (staff.isSwinging)
         {
             canShoot = false;
@@ -42,11 +47,21 @@ public class PlayerAttack : MonoBehaviour
 
     void OnFire(InputValue inputValue)
     {
+        if (GameState.GameIsPaused)
+        {
+            return;
+        }
+
         isShooting = inputValue.isPressed;
     }
 
     void OnAltFire()
     {
+        if (GameState.GameIsPaused)
+        {
+            return;
+        }
+
         SwingStaff();
     }
 
@@ -56,6 +71,7 @@ public class PlayerAttack : MonoBehaviour
         {
             return;
         }
+
         weaponStats.UpdateStats();
         GameObject projectile = Instantiate(weaponStats.projectilePrefab, staff.shootPoint.position, weaponPoint.transform.rotation);
         audioManager.Play("Shoot");
@@ -63,12 +79,14 @@ public class PlayerAttack : MonoBehaviour
         rb.velocity = weaponStats.projectileSpeed * weaponPoint.transform.right;
         StartCoroutine(ShootInterval());
     }
+
     public void SwingStaff()
     {
         if (staff.isSwinging)
         {
             return;
         }
+
         staffAnimator.SetTrigger("Swing");
     }
 

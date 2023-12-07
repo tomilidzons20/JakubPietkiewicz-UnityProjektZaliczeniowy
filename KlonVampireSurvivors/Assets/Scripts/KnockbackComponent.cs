@@ -9,6 +9,7 @@ public class KnockbackComponent : MonoBehaviour
     public float knockbackDuration = 0.2f;
     public float defaultKnockbackForce = 5f;
 
+    // Used mainly to stop and start enemy movement during knockback duration
     public UnityEvent OnStart;
     public UnityEvent OnEnd;
 
@@ -17,7 +18,7 @@ public class KnockbackComponent : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void ApplyKnockback(GameObject sender, float knockbackForce)
+    public void ApplyKnockback(float knockbackForce, GameObject sender)
     {
         StopAllCoroutines();
         OnStart?.Invoke();

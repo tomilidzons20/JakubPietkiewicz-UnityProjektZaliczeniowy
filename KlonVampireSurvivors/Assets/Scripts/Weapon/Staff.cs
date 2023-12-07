@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Staff : MonoBehaviour
 {
-    public float staffKnockbackForce = 15f;
+    public float knockbackForce = 15f;
 
     [HideInInspector]
     public bool isSwinging;
@@ -16,18 +16,18 @@ public class Staff : MonoBehaviour
 
     void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = AudioManager.instance;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {
-            audioManager.Play("Bonk");
-            HealthComponent health = collision.GetComponent<HealthComponent>();
-            if (health)
+            KnockbackComponent knockback = collision.GetComponent<KnockbackComponent>();
+            if (knockback)
             {
-                health.GetHit(0, staffKnockbackForce, transform.root.gameObject);
+                audioManager.Play("Bonk");
+                knockback.ApplyKnockback(knockbackForce, transform.root.gameObject);
             }
         }
     }

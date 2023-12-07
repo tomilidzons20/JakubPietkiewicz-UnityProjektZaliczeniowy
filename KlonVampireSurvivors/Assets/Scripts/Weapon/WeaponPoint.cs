@@ -10,6 +10,7 @@ public class WeaponPoint : MonoBehaviour
 
     void Update()
     {
+        // When swinging rotate/scale staff sprite to correct orientation
         Vector2 cursorDirection = (cursorPosition - (Vector2)transform.position).normalized;
         transform.right = cursorDirection;
         Vector2 scale = transform.localScale;

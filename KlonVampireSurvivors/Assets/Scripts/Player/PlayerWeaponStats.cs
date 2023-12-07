@@ -6,6 +6,7 @@ public class PlayerWeaponStats : MonoBehaviour
 {
     [SerializeField]
     private WeaponScriptable data;
+    [SerializeField]
     private PlayerStats playerStats;
 
     public GameObject projectilePrefab;
@@ -17,7 +18,6 @@ public class PlayerWeaponStats : MonoBehaviour
 
     void Awake()
     {
-        playerStats = FindObjectOfType<PlayerStats>();
         projectilePrefab = data.projectile;
         projectileInterval = data.interval;
         UpdateStats();

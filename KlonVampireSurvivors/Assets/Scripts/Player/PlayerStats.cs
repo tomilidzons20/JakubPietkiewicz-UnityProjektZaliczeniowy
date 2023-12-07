@@ -8,6 +8,8 @@ public class PlayerStats : MonoBehaviour
     private PlayerScriptable data;
     public HealthComponent health;
     public LevelUpMenu levelUpMenu;
+    public HealthBar healthBar;
+    public ExperienceBar experienceBar;
 
     [Space(10)]
     // Stats
@@ -27,15 +29,25 @@ public class PlayerStats : MonoBehaviour
 
     private bool canHeal = true;
 
+
     void Awake()
     {
+        // Init stats
         moveSpeed = data.moveSpeed;
         healthRegen = data.healthRegen;
         projectileSpeed = data.projectileSpeed;
         projectileDamage = data.projectileDamage;
         projectileDuration = data.projectileDuration;
         projectilePierce = data.projectilePierce;
+
+        // Init health component and healthbar
         health.HealthSetup(data.maxHealth);
+        healthBar.SetHealth(data.maxHealth);
+        healthBar.SetMaxHealth(data.maxHealth);
+
+        // Init experiencebar
+        experienceBar.SetExperience(experience);
+        experienceBar.SetMaxExperience(experienceToLevel);
     }
 
     void Update()
@@ -47,26 +59,37 @@ public class PlayerStats : MonoBehaviour
     {
         experience += exp;
         CheckLevelUp();
+        experienceBar.SetExperience(experience);
     }
 
     public void CheckLevelUp()
     {
         if (experience >= experienceToLevel) 
         {
+            // Update level, exp, maxexp and experiencebar
             level++;
+            // Save excess exp to next level
             experience -= experienceToLevel;
             experienceToLevel += experienceIncrease;
-            health.maxHealth = level + data.maxHealth;
+            experienceBar.SetExperience(experience);
+            experienceBar.SetMaxExperience(experienceToLevel);
+
+            // Update hp and healthbar max value
+            float currentMaxHealth = level + data.maxHealth;
+            health.maxHealth = currentMaxHealth;
+            healthBar.SetMaxHealth(currentMaxHealth);
+
             levelUpMenu.OpenLevelUpMenu();
         }
     }
-
+ 
     public void HealthRegen()
     {
         if(healthRegen > 0 && canHeal)
         {
             health.Heal(1);
             StartCoroutine(HealInterval());
+            healthBar.SetHealth(health.currentHealth);
         }
     }
 
@@ -75,6 +98,11 @@ public class PlayerStats : MonoBehaviour
         canHeal = false;
         yield return new WaitForSeconds(healthRegen);
         canHeal = true;
+    }
+
+    public void OnDamageTaken()
+    {
+        healthBar.SetHealth(health.currentHealth);
     }
 
     public void UpgradeStats(string stat)
@@ -104,8 +132,7 @@ public class PlayerStats : MonoBehaviour
                 projectilePierce++;
                 break;
         }
+
         levelUpMenu.CloseLevelUpMenu();
     }
-
-    
 }

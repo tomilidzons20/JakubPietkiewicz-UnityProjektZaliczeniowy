@@ -33,7 +33,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<HealthComponent>().GetHit(stats.damage, 0, gameObject);
+            collision.gameObject.GetComponent<HealthComponent>().GetHit(stats.damage);
         }
     }
 }

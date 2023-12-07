@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
             HealthComponent health = collision.GetComponent<HealthComponent>();
             if (health)
             {
-                health.GetHit(stats.projectileDamage, 0, stats.gameObject);
+                health.GetHit(stats.projectileDamage);
             }
             PierceHandler();
         }

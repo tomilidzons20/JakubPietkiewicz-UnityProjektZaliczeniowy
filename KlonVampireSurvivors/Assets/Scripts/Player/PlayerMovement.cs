@@ -12,16 +12,8 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 cursorPosition;
 
-    // Movement
     [HideInInspector]
     public Vector2 movementDirection;
-    [HideInInspector]
-    public Vector2 lastMovementDirection;
-
-    void Start()
-    {
-        lastMovementDirection = transform.right;    
-    }
 
     void Update()
     {
@@ -37,14 +29,13 @@ public class PlayerMovement : MonoBehaviour
 
     void OnMove(InputValue movementValue)
     {
-        if (!PauseMenu.GameIsPaused)
+        if (!GameState.GameIsPaused)
         {
             movementDirection = movementValue.Get<Vector2>().normalized;
             animator.SetFloat("Horizontal", movementDirection.x);
             animator.SetFloat("Vertical", movementDirection.y);
             if (movementDirection.sqrMagnitude > 0)
             {
-                lastMovementDirection = movementDirection;
                 animator.SetBool("IsMoving", true);
             }
             else
@@ -63,11 +54,13 @@ public class PlayerMovement : MonoBehaviour
 
     void OnLook()
     {
-        if (!PauseMenu.GameIsPaused)
+        if (GameState.GameIsPaused)
         {
-            Vector3 mousePosition = Mouse.current.position.ReadValue();
-            mousePosition.z = Camera.main.nearClipPlane;
-            cursorPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+            return;
         }
+
+        Vector3 mousePosition = Mouse.current.position.ReadValue();
+        mousePosition.z = Camera.main.nearClipPlane;
+        cursorPosition = Camera.main.ScreenToWorldPoint(mousePosition);
     }
 }
