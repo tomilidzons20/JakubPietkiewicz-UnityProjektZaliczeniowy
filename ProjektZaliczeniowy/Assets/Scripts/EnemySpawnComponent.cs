@@ -29,7 +29,7 @@ public class EnemySpawnComponent : MonoBehaviour
     private int currentWave;
     private bool canSpawn = true;
     // Time inbetween spawns
-    private float spawnInterval = 1f;
+    private float spawnInterval = 0.5f;
     // Duration of one wave
     private float waveInterval = 30f;
 
@@ -84,6 +84,7 @@ public class EnemySpawnComponent : MonoBehaviour
     {
         SpawnWave wave = waves[currentWave];
         // Check if all enemies have been spawned
+        List<EnemySpawn> possibleSpawns = new List<EnemySpawn>();
         if (wave.totalSpawned < wave.totalToSpawn)
         {
             StartCoroutine(SpawnInterval());
@@ -92,13 +93,16 @@ public class EnemySpawnComponent : MonoBehaviour
             {
                 if(spawn.spawned < spawn.toSpawn)
                 {
-                    // Get random spawnPoint
-                    Transform spawnPosition = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
-                    Instantiate(spawn.enemyPrefab, spawnPosition.position, Quaternion.identity);
-                    spawn.spawned++;
-                    wave.totalSpawned++;
+                    possibleSpawns.Add(spawn);
                 }
             }
+            // Get random spawnPoint
+            Transform spawnPosition = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
+            // Get random possible enemy to spawn
+            EnemySpawn enemy = possibleSpawns[UnityEngine.Random.Range(0, possibleSpawns.Count)];
+            Instantiate(enemy.enemyPrefab, spawnPosition.position, Quaternion.identity);
+            enemy.spawned++;
+            wave.totalSpawned++;
         }
     }
 

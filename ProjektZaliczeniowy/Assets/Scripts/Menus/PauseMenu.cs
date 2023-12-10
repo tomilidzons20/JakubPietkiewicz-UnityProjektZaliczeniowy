@@ -48,7 +48,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (playerStats != null)
         {
-            // One string cause I don't want to spend time alining every text object
+            // One string cause I don't want to spend time aligning every text object
             playerStatsText.text = 
                 $"HP: {playerStats.health.currentHealth} / {playerStats.health.maxHealth}\n" +
                 $"+1HP / {playerStats.healthRegen}s\n" +

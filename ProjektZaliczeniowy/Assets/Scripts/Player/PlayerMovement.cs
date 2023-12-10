@@ -29,25 +29,24 @@ public class PlayerMovement : MonoBehaviour
 
     void OnMove(InputValue movementValue)
     {
-        if (!GameState.GameIsPaused)
-        {
-            movementDirection = movementValue.Get<Vector2>().normalized;
-            animator.SetFloat("Horizontal", movementDirection.x);
-            animator.SetFloat("Vertical", movementDirection.y);
-            if (movementDirection.sqrMagnitude > 0)
-            {
-                animator.SetBool("IsMoving", true);
-            }
-            else
-            {
-                animator.SetBool("IsMoving", false);
-            }
-        }
-        else
+        if (GameState.GameIsPaused)
         {
             // Prevent movement when button held down and then paused
             // Player used to move without input in last direction
             movementDirection = Vector2.zero;
+            animator.SetBool("IsMoving", false);
+            return;
+        }
+
+        movementDirection = movementValue.Get<Vector2>().normalized;
+        animator.SetFloat("Horizontal", movementDirection.x);
+        animator.SetFloat("Vertical", movementDirection.y);
+        if (movementDirection.sqrMagnitude > 0)
+        {
+            animator.SetBool("IsMoving", true);
+        }
+        else
+        {
             animator.SetBool("IsMoving", false);
         }
     }
