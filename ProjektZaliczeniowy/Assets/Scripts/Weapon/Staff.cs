@@ -11,7 +11,6 @@ public class Staff : MonoBehaviour
     public bool isSwinging;
 
     public Transform shootPoint;
-    public Collider2D staffHitbox;
     private AudioManager audioManager;
 
     void Start()

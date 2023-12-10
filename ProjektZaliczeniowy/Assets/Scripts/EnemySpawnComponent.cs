@@ -30,13 +30,10 @@ public class EnemySpawnComponent : MonoBehaviour
     private bool canSpawn = true;
     // Time inbetween spawns
     private float spawnInterval = 0.5f;
-    // Duration of one wave
-    private float waveInterval = 30f;
 
     private void Start()
     {
         TotalToSpawn();
-        StartCoroutine(WaveInterval());
         // Init wave info, currentWave + 1 cause it starts from 0
         waveInfo.SetTotalWaves(waves.Count);
         waveInfo.SetCurrentWave(currentWave + 1);
@@ -64,8 +61,6 @@ public class EnemySpawnComponent : MonoBehaviour
         {
             waveInfo.SetCurrentWave(currentWave + 1);
             TotalToSpawn();
-            // Start countdown for next wave
-            StartCoroutine(WaveInterval());
         }
     }
 
@@ -88,7 +83,7 @@ public class EnemySpawnComponent : MonoBehaviour
         if (wave.totalSpawned < wave.totalToSpawn)
         {
             StartCoroutine(SpawnInterval());
-            // Look for enemy to spawn, spawn each enemy once if spawned < toSpawn
+            // Look for enemy to spawn if spawned < toSpawn
             foreach(EnemySpawn spawn in wave.enemyList)
             {
                 if(spawn.spawned < spawn.toSpawn)
@@ -104,6 +99,10 @@ public class EnemySpawnComponent : MonoBehaviour
             enemy.spawned++;
             wave.totalSpawned++;
         }
+        else
+        {
+            AddWave();
+        }
     }
 
     IEnumerator SpawnInterval()
@@ -111,11 +110,5 @@ public class EnemySpawnComponent : MonoBehaviour
         canSpawn = false;
         yield return new WaitForSeconds(spawnInterval);
         canSpawn = true;
-    }
-
-    IEnumerator WaveInterval()
-    {
-        yield return new WaitForSeconds(waveInterval);
-        AddWave();
     }
 }

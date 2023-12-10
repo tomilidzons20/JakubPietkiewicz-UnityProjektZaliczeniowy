@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfcc1d0e1de791548a5a7d63cf51c81b, type: 3}
   m_Name: GolemBoss
   m_EditorClassIdentifier: 
-  MaxHealth: 25
-  MoveSpeed: 6
-  Damage: 10
+  MaxHealth: 35
+  MoveSpeed: 5
+  Damage: 8

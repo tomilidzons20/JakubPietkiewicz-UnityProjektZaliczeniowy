@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfcc1d0e1de791548a5a7d63cf51c81b, type: 3}
   m_Name: RedSlimeEnemy
   m_EditorClassIdentifier: 
-  MaxHealth: 2
+  MaxHealth: 1.5
   MoveSpeed: 4
   Damage: 1

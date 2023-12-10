@@ -20,13 +20,13 @@ public class PlayerWeaponStats : MonoBehaviour
     {
         projectilePrefab = data.projectile;
         projectileInterval = data.interval;
+        projectileDuration = data.duration;
         UpdateStats();
     }
 
     public void UpdateStats()
     {
         projectileSpeed = data.speed * (1 + playerStats.projectileSpeed/100);
-        projectileDuration = data.duration * (1 + playerStats.projectileDuration/100);
         projectileDamage = data.damage * (1 + playerStats.projectileDamage/100);
         projectilePierce = data.pierce + playerStats.projectilePierce;
     }

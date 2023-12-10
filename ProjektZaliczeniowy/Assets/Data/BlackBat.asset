@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfcc1d0e1de791548a5a7d63cf51c81b, type: 3}
   m_Name: BlackBat
   m_EditorClassIdentifier: 
-  MaxHealth: 8
-  MoveSpeed: 4
+  MaxHealth: 10
+  MoveSpeed: 3
   Damage: 2

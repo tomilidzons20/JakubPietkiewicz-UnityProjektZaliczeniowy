@@ -23,15 +23,10 @@ public class PlayerScriptable : ScriptableObject
     float ProjectileSpeed;
     public float projectileSpeed { get => ProjectileSpeed; private set => ProjectileSpeed = value; }
 
-    // + bonus damage
+    // % bonus damage
     [SerializeField]
     float ProjectileDamage;
     public float projectileDamage { get => ProjectileDamage; private set => ProjectileDamage = value; }
-
-    // % bonus duration
-    [SerializeField]
-    float ProjectileDuration;
-    public float projectileDuration { get => ProjectileDuration; private set => ProjectileDuration = value; }
 
     // + bonus pierce
     [SerializeField]
