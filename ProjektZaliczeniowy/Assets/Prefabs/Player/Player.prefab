@@ -205,7 +205,6 @@ MonoBehaviour:
   knockbackForce: 15
   isSwinging: 0
   shootPoint: {fileID: 1348954252726787669}
-  staffHitbox: {fileID: 6049424653910756420}
 --- !u!1 &6002104163037334079
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,7 +554,6 @@ MonoBehaviour:
   healthRegen: 0
   projectileSpeed: 0
   projectileDamage: 0
-  projectileDuration: 0
   projectilePierce: 0
   level: 1
   experience: 0

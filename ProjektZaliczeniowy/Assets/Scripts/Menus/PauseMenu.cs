@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
 
     public PlayerStats playerStats;
+    public PlayerWeaponStats playerWeaponStats;
 
     public TMP_Text playerStatsText;
 
@@ -48,17 +49,16 @@ public class PauseMenu : MonoBehaviour
     {
         if (playerStats != null)
         {
-            // One string cause I don't want to spend time alining every text object
+            // One string cause I don't want to spend time aligning every text object
             playerStatsText.text = 
                 $"HP: {playerStats.health.currentHealth} / {playerStats.health.maxHealth}\n" +
                 $"+1HP / {playerStats.healthRegen}s\n" +
                 $"LVL: {playerStats.level}\n" +
                 $"EXP: {playerStats.experience}/{playerStats.experienceToLevel}\n" +
-                $"MoveSpeed: {playerStats.moveSpeed}\n\n" +
-                $"Damage: {playerStats.projectileDamage}%\n" +
-                $"Speed: {playerStats.projectileSpeed}%\n" +
-                $"Duration: {playerStats.projectileDuration}%\n" +
-                $"Pierce: {playerStats.projectilePierce} \n";
+                $"MoveSpeed: {playerStats.moveSpeed:F2}\n\n" +
+                $"Damage: {playerWeaponStats.projectileDamage:F2}\n" +
+                $"Speed: {playerWeaponStats.projectileSpeed:F2}\n" +
+                $"Pierce: {playerWeaponStats.projectilePierce}\n";
         }
     }
 

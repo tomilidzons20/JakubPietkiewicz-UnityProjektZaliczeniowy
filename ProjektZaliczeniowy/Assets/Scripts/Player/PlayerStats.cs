@@ -17,7 +17,6 @@ public class PlayerStats : MonoBehaviour
     public float healthRegen;
     public float projectileSpeed;
     public float projectileDamage;
-    public float projectileDuration;
     public int projectilePierce;
 
     [Space(10)]
@@ -37,7 +36,6 @@ public class PlayerStats : MonoBehaviour
         healthRegen = data.healthRegen;
         projectileSpeed = data.projectileSpeed;
         projectileDamage = data.projectileDamage;
-        projectileDuration = data.projectileDuration;
         projectilePierce = data.projectilePierce;
 
         // Init health component and healthbar
@@ -120,13 +118,10 @@ public class PlayerStats : MonoBehaviour
                 }
                 break;
             case "projectileDamage":
-                projectileDamage += 25f;
+                projectileDamage += 50f;
                 break;
             case "projectileSpeed":
                 projectileSpeed += 25f;
-                break;
-            case "projectileDuration":
-                projectileDuration += 25f;
                 break;
             case "projectilePierce":
                 projectilePierce++;

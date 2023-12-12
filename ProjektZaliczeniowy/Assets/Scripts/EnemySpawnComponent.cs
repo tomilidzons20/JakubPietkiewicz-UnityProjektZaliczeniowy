@@ -29,14 +29,11 @@ public class EnemySpawnComponent : MonoBehaviour
     private int currentWave;
     private bool canSpawn = true;
     // Time inbetween spawns
-    private float spawnInterval = 1f;
-    // Duration of one wave
-    private float waveInterval = 30f;
+    private float spawnInterval = 0.5f;
 
     private void Start()
     {
         TotalToSpawn();
-        StartCoroutine(WaveInterval());
         // Init wave info, currentWave + 1 cause it starts from 0
         waveInfo.SetTotalWaves(waves.Count);
         waveInfo.SetCurrentWave(currentWave + 1);
@@ -64,8 +61,6 @@ public class EnemySpawnComponent : MonoBehaviour
         {
             waveInfo.SetCurrentWave(currentWave + 1);
             TotalToSpawn();
-            // Start countdown for next wave
-            StartCoroutine(WaveInterval());
         }
     }
 
@@ -84,21 +79,29 @@ public class EnemySpawnComponent : MonoBehaviour
     {
         SpawnWave wave = waves[currentWave];
         // Check if all enemies have been spawned
+        List<EnemySpawn> possibleSpawns = new List<EnemySpawn>();
         if (wave.totalSpawned < wave.totalToSpawn)
         {
             StartCoroutine(SpawnInterval());
-            // Look for enemy to spawn, spawn each enemy once if spawned < toSpawn
+            // Look for enemy to spawn if spawned < toSpawn
             foreach(EnemySpawn spawn in wave.enemyList)
             {
                 if(spawn.spawned < spawn.toSpawn)
                 {
-                    // Get random spawnPoint
-                    Transform spawnPosition = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
-                    Instantiate(spawn.enemyPrefab, spawnPosition.position, Quaternion.identity);
-                    spawn.spawned++;
-                    wave.totalSpawned++;
+                    possibleSpawns.Add(spawn);
                 }
             }
+            // Get random spawnPoint
+            Transform spawnPosition = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
+            // Get random possible enemy to spawn
+            EnemySpawn enemy = possibleSpawns[UnityEngine.Random.Range(0, possibleSpawns.Count)];
+            Instantiate(enemy.enemyPrefab, spawnPosition.position, Quaternion.identity);
+            enemy.spawned++;
+            wave.totalSpawned++;
+        }
+        else
+        {
+            AddWave();
         }
     }
 
@@ -107,11 +110,5 @@ public class EnemySpawnComponent : MonoBehaviour
         canSpawn = false;
         yield return new WaitForSeconds(spawnInterval);
         canSpawn = true;
-    }
-
-    IEnumerator WaveInterval()
-    {
-        yield return new WaitForSeconds(waveInterval);
-        AddWave();
     }
 }

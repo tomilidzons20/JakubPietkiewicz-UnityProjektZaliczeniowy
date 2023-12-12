@@ -13,7 +13,6 @@ public class PlayerAttack : MonoBehaviour
     public PlayerWeaponStats weaponStats;
 
     private bool isShooting;
-    private bool canShoot;
 
     private bool shootOnCooldown;
     private AudioManager audioManager;
@@ -30,16 +29,7 @@ public class PlayerAttack : MonoBehaviour
             return;
         }
 
-        if (staff.isSwinging)
-        {
-            canShoot = false;
-        }
-        else
-        {
-            canShoot = isShooting;
-        }
-
-        if (canShoot)
+        if (isShooting && !staff.isSwinging)
         {
             ShootProjectile();
         }
